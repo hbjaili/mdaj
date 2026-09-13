@@ -1,0 +1,56 @@
+# Ignore everything in the repository root by default
+/*
+
+# Do not ignore the public_html directory
+!/public_html/
+
+# Do not ignore the www symlink
+!/www
+
+# Do not ignore the .github folder
+!/.github/
+
+# Do not ignore this .gitignore file
+!/.gitignore
+
+# Local OJS configuration and secrets
+/public_html/config.inc.php
+/public_html/config.inc.php.*
+/public_html/.env
+/public_html/.env.*
+!/public_html/.env.example
+
+# Runtime cache and generated files
+/public_html/cache/**
+/public_html/scheduledTaskLogs/**
+/public_html/usageStats/**
+*.log
+/public_html/error_log
+/public_html/error_log.*
+
+# User-uploaded public files (keep the protective placeholder)
+/public_html/public/**
+!/public_html/public/index.html
+
+# Frontend dependencies and test/build output
+/public_html/node_modules/
+/public_html/coverage/
+/public_html/build/
+/public_html/dist/
+/public_html/cypress/screenshots/
+/public_html/cypress/videos/
+/public_html/cypress/downloads/
+
+# Temporary and backup files
+*.bak
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Editor and operating-system metadata
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db
