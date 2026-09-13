@@ -1,0 +1,63 @@
+/**
+ * Detox-style scroll-to-top control.
+ */
+
+.mda_detox_scroll_top {
+	position: fixed;
+	right: 30px;
+	bottom: 105%;
+	z-index: 999;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: @mda-detox-primary;
+	color: #fff;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition:
+		bottom 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
+		opacity @mda-detox-transition,
+		visibility 0s linear 700ms,
+		box-shadow @mda-detox-transition;
+	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+.mda_detox_scroll_top:hover,
+.mda_detox_scroll_top:focus {
+	box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+}
+
+.mda_detox_scroll_top--visible {
+	bottom: 30px;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transition:
+		bottom 700ms cubic-bezier(0.22, 0.61, 0.36, 1),
+		opacity @mda-detox-transition,
+		visibility 0s linear 0s,
+		box-shadow @mda-detox-transition;
+}
+
+@media (max-width: 767px) {
+	.mda_detox_scroll_top {
+		right: 20px;
+		width: 44px;
+		height: 44px;
+		font-size: 18px;
+	}
+
+	.mda_detox_scroll_top--visible {
+		bottom: 20px;
+	}
+}

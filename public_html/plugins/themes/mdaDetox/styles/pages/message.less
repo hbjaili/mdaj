@@ -1,0 +1,51 @@
+/**
+ * MDA Detox generic message page.
+ */
+
+.mda_detox_message_text {
+	color: @mda-detox-text;
+	font-size: 17px;
+	line-height: 1.9;
+
+	p {
+		margin: 0 0 16px;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+
+	a {
+		color: @mda-detox-primary;
+	}
+}
+
+.mda_detox_message_back_link {
+	margin-top: 30px;
+}
+
+.mda_detox_message_page_content a.mda_detox_message_button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50px;
+	padding: 12px 28px;
+	border: 2px solid @mda-detox-primary;
+	border-radius: 32px;
+	background: @mda-detox-primary;
+	color: #fff;
+	font-family: @mda-detox-font-heading;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.035em;
+	line-height: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+
+	&:hover,
+	&:focus {
+		background: #fff;
+		color: @mda-detox-primary;
+		text-decoration: none;
+	}
+}

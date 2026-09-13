@@ -1,0 +1,214 @@
+/**
+ * Detox-style footer using OJS journal metadata and navigation.
+ */
+
+.mda_detox_footer_wrapper.pkp_structure_footer_wrapper {
+	background: #fff;
+}
+
+.mda_detox_footer {
+	background: #fff;
+	color: @mda-detox-text;
+	text-align: left;
+}
+
+.mda_detox_footer_container {
+	width: 100%;
+	max-width: @mda-detox-content-width;
+	margin: 0 auto;
+	padding: 0 30px;
+}
+
+.mda_detox_footer_top {
+	padding: 90px 0 70px;
+	border-bottom: 1px solid @mda-detox-border;
+}
+
+.mda_detox_footer_widgets {
+	display: grid;
+	grid-template-columns: 1.25fr 1fr 1fr 1.25fr;
+	gap: 40px;
+}
+
+.mda_detox_footer_column {
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			margin-bottom: 10px;
+			color: @mda-detox-text;
+			font-size: 15px;
+			line-height: 1.7;
+		}
+
+		li:last-child {
+			margin-bottom: 0;
+		}
+
+		a {
+			color: @mda-detox-text;
+			text-decoration: none;
+			transition: color @mda-detox-transition;
+
+			&:hover,
+			&:focus {
+				color: @mda-detox-primary;
+			}
+		}
+	}
+}
+
+.mda_detox_footer_title {
+	margin: 0 0 26px;
+	color: @mda-detox-heading;
+	font-family: @mda-detox-font-heading;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.mda_detox_footer_brand {
+	.mda_detox_footer_logo {
+		display: inline-flex;
+		align-items: center;
+		margin-bottom: 24px;
+		color: @mda-detox-heading;
+		text-decoration: none;
+
+		img {
+			display: block;
+			width: auto;
+			height: auto;
+			max-width: 190px;
+			max-height: 64px;
+		}
+	}
+
+	.mda_detox_footer_logo_text {
+		font-family: @mda-detox-font-heading;
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 1.25;
+	}
+
+	.mda_detox_footer_text {
+		max-width: 340px;
+		font-size: 15px;
+		line-height: 1.85;
+
+		p {
+			margin: 0;
+		}
+
+		p + p {
+			margin-top: 12px;
+		}
+	}
+}
+
+.mda_detox_footer_badges {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin-top: 0;
+
+	a {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	img {
+		display: block;
+		width: auto;
+		height: 28px;
+		transition: opacity @mda-detox-transition;
+	}
+
+	a:hover img,
+	a:focus img {
+		opacity: 0.82;
+	}
+}
+
+.mda_detox_footer_bottom_start {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px;
+}
+
+.mda_detox_footer_bottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 28px 0;
+}
+
+.mda_detox_footer_copyright p {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.mda_detox_footer_nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 24px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		position: relative;
+	}
+
+	li + li:before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: -13px;
+		width: 1px;
+		height: 14px;
+		background: @mda-detox-text;
+		transform: translateY(-50%);
+	}
+
+	a {
+		color: @mda-detox-text;
+		font-size: 14px;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: @mda-detox-primary;
+		}
+	}
+}
+
+@media (max-width: 991px) {
+	.mda_detox_footer_widgets {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 36px 28px;
+	}
+
+	.mda_detox_footer_bottom {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+@media (max-width: 767px) {
+	.mda_detox_footer_container {
+		padding: 0 24px;
+	}
+
+	.mda_detox_footer_widgets {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+}

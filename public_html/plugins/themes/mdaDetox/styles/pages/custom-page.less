@@ -1,0 +1,113 @@
+/**
+ * Detox-inspired custom navigation-menu pages.
+ */
+
+.mda_detox_custom_page_body {
+	&,
+	.pkp_structure_page,
+	.pkp_structure_content,
+	.pkp_structure_main,
+	.mda_detox_custom_page {
+		background: #fff;
+	}
+
+	.pkp_structure_content {
+		display: block;
+		width: 100%;
+		max-width: none;
+		padding-top: 0;
+		padding-right: 0;
+		padding-bottom: 0;
+		padding-left: 0;
+	}
+
+	.pkp_structure_main {
+		float: none;
+		width: 100%;
+		max-width: none;
+		padding-top: 0;
+		padding-right: 0;
+		padding-bottom: 0;
+		padding-left: 0;
+		border: 0;
+
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+
+	.pkp_structure_sidebar {
+		display: none;
+	}
+
+	.mda_detox_header:not(.mda_detox_header--scrolled) .mda_detox_header_inner {
+		background: @mda-detox-page-title-bg;
+	}
+}
+
+.mda_detox_custom_page_section {
+	padding: 80px 0;
+	background: #fff;
+}
+
+.mda_detox_custom_page_container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+
+.mda_detox_custom_page_content {
+	color: @mda-detox-text;
+	font-size: 17px;
+	line-height: 1.9;
+
+	h2,
+	h3,
+	h4,
+	h5 {
+		margin: 32px 0 12px;
+		color: @mda-detox-heading;
+		font-family: @mda-detox-font-heading;
+		font-weight: 700;
+		line-height: 1.35;
+	}
+
+	h2:first-child,
+	h3:first-child,
+	h4:first-child,
+	h5:first-child {
+		margin-top: 0;
+	}
+
+	p {
+		margin: 0 0 16px;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+
+	ul,
+	ol {
+		margin: 0 0 16px;
+		padding-left: 22px;
+	}
+
+	a {
+		color: @mda-detox-primary;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+		border-radius: @mda-detox-radius;
+	}
+}
+
+@media (max-width: 767px) {
+	.mda_detox_custom_page_section {
+		padding: 64px 0;
+	}
+}

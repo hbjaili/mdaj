@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MDA Detox Theme 1.0.0\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.themes.mdaDetox.name"
+msgstr "MDA Detox Theme"
+
+msgid "plugins.themes.mdaDetox.description"
+msgstr "A responsive OJS theme for MDA journals inspired by the Detox visual reference."
+
+msgid "plugins.themes.mdaDetox.option.primaryColour.label"
+msgstr "MDA Detox primary colour"
+
+msgid "plugins.themes.mdaDetox.option.primaryColour.description"
+msgstr "Select the primary colour used for links, buttons, and visual accents."
+
+msgid "plugins.themes.mdaDetox.option.ctaInfo.label"
+msgstr "Blue box information"
+
+msgid "plugins.themes.mdaDetox.option.ctaInfo.description"
+msgstr "Text shown in the blue information box above the footer."
+
+msgid "plugins.themes.mdaDetox.home.eyebrow"
+msgstr "Research · Discovery · Open access"
+
+msgid "plugins.themes.mdaDetox.home.aboutEyebrow"
+msgstr "About the journal"
+
+msgid "plugins.themes.mdaDetox.home.issueEyebrow"
+msgstr "Latest research"
+
+msgid "plugins.themes.mdaDetox.home.announcementsEyebrow"
+msgstr "Latest news"
+
+msgid "plugins.themes.mdaDetox.home.explore"
+msgstr "Explore the journal"
+
+msgid "plugins.themes.mdaDetox.home.readersDescription"
+msgstr "Browse published articles and open-access research."
+
+msgid "plugins.themes.mdaDetox.home.authorsDescription"
+msgstr "Learn how to prepare and submit your manuscript."
+
+msgid "plugins.themes.mdaDetox.home.librariansDescription"
+msgstr "Find indexing, licensing, and library support information."
+
+msgid "plugins.themes.mdaDetox.home.currentIssueDescription"
+msgstr "Read the journal's latest peer-reviewed research."
+
+msgid "plugins.themes.mdaDetox.home.archivesDescription"
+msgstr "Explore every published issue in the journal archive."
+
+msgid "plugins.themes.mdaDetox.home.submissionsDescription"
+msgstr "Review the author guidelines and submit your research."
+
+msgid "plugins.themes.mdaDetox.home.animatedWord"
+msgstr "Aviation"
+
+msgid "plugins.themes.mdaDetox.home.headingPrefix"
+msgstr "Multi-Disciplinary"
+
+msgid "plugins.themes.mdaDetox.home.staticWord"
+msgstr "Journal"
+
+msgid "plugins.themes.mdaDetox.footer.quickLinks"
+msgstr "Quick Links"
+
+msgid "plugins.themes.mdaDetox.footer.information"
+msgstr "Information"
+
+msgid "plugins.themes.mdaDetox.footer.contact"
+msgstr "Contact Info"
+
+msgid "plugins.themes.mdaDetox.cta.title"
+msgstr "Get Ready to Started It’s Fast, Free & Very Easy"
+
+msgid "plugins.themes.mdaDetox.cta.button"
+msgstr "Contact Us"
+
+msgid "plugins.themes.mdaDetox.scrollTop"
+msgstr "Scroll to top"
+
+msgid "plugins.themes.mdaDetox.footer.allRightsReserved"
+msgstr "All rights reserved."

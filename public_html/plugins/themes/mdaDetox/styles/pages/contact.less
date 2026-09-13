@@ -1,0 +1,121 @@
+/**
+ * Detox-inspired Contact page.
+ */
+
+.mda_detox_page_contact {
+	background: #fff;
+}
+
+.mda_detox_contact_page_section {
+	padding: 80px 0;
+	background: #fff;
+}
+
+.mda_detox_contact_page_container {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.mda_detox_contact_page_content {
+	color: @mda-detox-text;
+	font-size: 17px;
+	line-height: 1.9;
+}
+
+.mda_detox_contact_grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 30px;
+}
+
+.mda_detox_contact_card {
+	padding: 30px 32px;
+	border: 1px solid @mda-detox-border;
+	border-radius: @mda-detox-radius;
+	background: #fff;
+	box-shadow: 0 8px 24px rgba(34, 34, 34, 0.05);
+
+	h2 {
+		margin: 0 0 16px;
+		color: @mda-detox-heading;
+		font-family: @mda-detox-font-heading;
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 1.35;
+	}
+}
+
+.mda_detox_contact_card_address {
+	grid-column: 1 / -1;
+}
+
+.mda_detox_contact_card_body {
+	p {
+		margin: 0 0 14px;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+
+	a {
+		color: @mda-detox-primary;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+.mda_detox_contact_name {
+	margin: 0 0 6px;
+	color: @mda-detox-heading;
+	font-family: @mda-detox-font-heading;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.mda_detox_contact_title,
+.mda_detox_contact_affiliation {
+	margin: 0 0 12px;
+}
+
+.mda_detox_contact_detail {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 4px 12px;
+	margin-top: 14px;
+}
+
+.mda_detox_contact_label {
+	min-width: 60px;
+	color: @mda-detox-heading;
+	font-family: @mda-detox-font-heading;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.mda_detox_contact_value {
+	color: @mda-detox-text;
+}
+
+.mda_detox_contact_page_content .cmp_edit_link {
+	display: inline-block;
+	margin-top: 26px;
+}
+
+@media (max-width: 767px) {
+	.mda_detox_contact_page_section {
+		padding: 64px 0;
+	}
+
+	.mda_detox_contact_card {
+		padding: 24px 20px;
+	}
+}

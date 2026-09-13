@@ -1,0 +1,83 @@
+/**
+ * Blue call-to-action band shown immediately above the footer.
+ */
+
+.mda_detox_cta {
+	position: relative;
+	overflow: hidden;
+	padding: 100px 24px;
+	background: @mda-detox-primary;
+	text-align: center;
+
+	&:before,
+	&:after {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.08);
+		pointer-events: none;
+	}
+
+	&:before {
+		top: -180px;
+		left: -160px;
+		width: 460px;
+		height: 460px;
+	}
+
+	&:after {
+		right: -120px;
+		bottom: -150px;
+		width: 360px;
+		height: 360px;
+	}
+}
+
+.mda_detox_cta_container {
+	position: relative;
+	z-index: 1;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.mda_detox_cta_title {
+	margin: 0;
+	color: #fff;
+	font-family: @mda-detox-font-heading;
+	font-size: ~"clamp(30px, 4vw, 42px)";
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.mda_detox_cta_submit_link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 52px;
+	margin-top: 28px;
+	padding: 12px 34px;
+	border-radius: 30px;
+	background: #fff;
+	color: @mda-detox-primary;
+	font-family: @mda-detox-font-heading;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-decoration: none;
+	box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
+	transition: background @mda-detox-transition, color @mda-detox-transition, transform @mda-detox-transition;
+
+	&:hover,
+	&:focus {
+		background: darken(@mda-detox-primary, 8%);
+		color: #fff;
+		text-decoration: none;
+		transform: translateY(-2px);
+	}
+}
+
+@media (max-width: 767px) {
+	.mda_detox_cta {
+		padding: 72px 24px;
+	}
+}

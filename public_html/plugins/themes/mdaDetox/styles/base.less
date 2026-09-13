@@ -1,0 +1,33 @@
+/**
+ * Minimal theme foundation. Component and page styling will be added in
+ * separate, reviewable phases.
+ */
+
+body {
+	background: @mda-detox-background;
+	color: @mda-detox-text;
+	font-family: @mda-detox-font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: @mda-detox-heading;
+	font-family: @mda-detox-font-heading;
+}
+
+a {
+	color: @mda-detox-primary;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 3px solid fade(@mda-detox-primary, 45%);
+	outline-offset: 2px;
+}

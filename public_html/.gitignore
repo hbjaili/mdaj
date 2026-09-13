@@ -1,0 +1,41 @@
+# Local OJS configuration and secrets
+/config.inc.php
+/config.inc.php.*
+/.env
+/.env.*
+!/.env.example
+
+# Runtime cache and generated files
+/cache/**
+/scheduledTaskLogs/**
+/usageStats/**
+*.log
+/error_log
+/error_log.*
+
+# User-uploaded public files (keep the protective placeholder)
+/public/**
+!/public/index.html
+
+# Frontend dependencies and test/build output
+/node_modules/
+/coverage/
+/build/
+/dist/
+/cypress/screenshots/
+/cypress/videos/
+/cypress/downloads/
+
+# Temporary and backup files
+*.bak
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Editor and operating-system metadata
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db
