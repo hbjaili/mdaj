@@ -7,6 +7,9 @@
 # Do not ignore the www symlink
 !/www
 
+# Do not ignore the MD_Files directory
+!/MD_Files/
+
 # Do not ignore the .github folder
 !/.github/
 
@@ -42,6 +45,7 @@
 /public_html/cypress/downloads/
 
 # Temporary and backup files
+/public_html_git_backup/
 *.bak
 *.tmp
 *.temp
