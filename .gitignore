@@ -1,20 +1,43 @@
-# Ignore everything in the repository root by default
-/*
+# MDA Journal repository ignore rules
+#
+# Tracked: project.md, public_html/, the www symlink, .github/, .gitignore.
+# Everything listed below lives in the home directory but is tooling,
+# private data, or generated output that does not belong in Git.
 
-# Do not ignore the public_html directory
-!/public_html/
+# Local tooling, shell state, caches and credentials
+/.agents/
+/.bash_aliases
+/.bash_history
+/.bash_logout
+/.bashrc
+/.cache/
+/.codex/
+/.config/
+/.gemini/
+/.gitconfig
+/.lesshst
+/.local/
+/.npm/
+/.profile
+/.ssh/
+/.sudo_as_admin_successful
+/.viminfo
 
-# Do not ignore the www symlink
-!/www
+# Binaries and downloaded tools
+/bin/
 
-# Do not ignore the MD_Files directory
-!/MD_Files/
+# Design references, research material and working assets (large, not deployed)
+/resources/
 
-# Do not ignore the .github folder
-!/.github/
+# OJS private upload directory (outside the web root)
+/files/
 
-# Do not ignore this .gitignore file
-!/.gitignore
+# Database dumps and archives kept outside the web root
+/backups/
+/*.sql
+/*.sql.gz
+/*.tar.gz
+/*.zip
 
 # Local OJS configuration and secrets
 /public_html/config.inc.php
@@ -23,13 +46,13 @@
 /public_html/.env.*
 !/public_html/.env.example
 
-# Runtime cache and generated files
+# Runtime cache, generated files and logs
 /public_html/cache/**
 /public_html/scheduledTaskLogs/**
 /public_html/usageStats/**
-*.log
 /public_html/error_log
 /public_html/error_log.*
+*.log
 
 # User-uploaded public files (keep the protective placeholder)
 /public_html/public/**
@@ -45,7 +68,6 @@
 /public_html/cypress/downloads/
 
 # Temporary and backup files
-/public_html_git_backup/
 *.bak
 *.tmp
 *.temp
