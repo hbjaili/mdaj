@@ -18,11 +18,21 @@
 		<header class="pkp_structure_head mda_detox_header" id="headerNavigationContainer" role="banner">
 			{include file="frontend/components/skipLinks.tpl"}
 
-			{if $currentContext && $currentContext->getData('onlineIssn')}
-				<div class="mda_detox_header_topbar" aria-label="{translate|escape key="manager.setup.onlineIssn"}">
+			{if $currentContext && ($currentContext->getData('onlineIssn') || $currentContext->getData('printIssn'))}
+				<div class="mda_detox_header_topbar" aria-label="{translate|escape key="manager.setup.onlineIssn"} / {translate|escape key="manager.setup.printIssn"}">
 					<div class="mda_detox_header_topbar_inner">
-						<span class="mda_detox_header_topbar_label">{translate key="manager.setup.onlineIssn"}</span>
-						<span class="mda_detox_header_topbar_value">{$currentContext->getData('onlineIssn')|escape}</span>
+						{if $currentContext->getData('onlineIssn')}
+							<span class="mda_detox_header_topbar_item">
+								<span class="mda_detox_header_topbar_label">{translate key="manager.setup.onlineIssn"}</span>
+								<span class="mda_detox_header_topbar_value">{$currentContext->getData('onlineIssn')|escape}</span>
+							</span>
+						{/if}
+						{if $currentContext->getData('printIssn')}
+							<span class="mda_detox_header_topbar_item">
+								<span class="mda_detox_header_topbar_label">{translate key="manager.setup.printIssn"}</span>
+								<span class="mda_detox_header_topbar_value">{$currentContext->getData('printIssn')|escape}</span>
+							</span>
+						{/if}
 					</div>
 				</div>
 			{/if}

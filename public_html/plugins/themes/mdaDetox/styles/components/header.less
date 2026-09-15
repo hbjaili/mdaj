@@ -23,11 +23,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	flex-wrap: wrap;
 	min-height: 36px;
 	padding: 6px ~"clamp(24px, 5vw, 100px)";
 	font-size: 12px;
 	letter-spacing: 0.04em;
 	line-height: 1.2;
+}
+
+.mda_detox_header_topbar_item + .mda_detox_header_topbar_item {
+	margin-left: 24px;
+	padding-left: 24px;
+	border-left: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .mda_detox_header_topbar_label {

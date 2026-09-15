@@ -1,6 +1,6 @@
 # MDA Journal — Project Documentation
 
-**Last full audit and documentation update:** 2026-09-14
+**Last full audit and documentation update:** 2026-09-15
 
 This is the single authoritative guide for the Multi-Disciplinary Aviation
 Journal (MDAJ) Open Journal Systems installation at
@@ -63,7 +63,7 @@ OJS's own `README.md` and other upstream files are not project documentation.
 | Users | 8 accounts, none disabled |
 | Submissions | 0 — both manuscripts were deleted on 2026-09-14 (see §6) |
 | Published content | 0 issues, 0 published articles, 0 DOI records |
-| ISSN | Online 3152-8961 (displayed), print 3122-3206 (configured, not displayed) |
+| ISSN | Online 3152-8961 and print 3122-3206, both displayed in the theme header topbar |
 | Licence | CC BY 4.0 (`licenseUrl`), copyright holder type `author` |
 | Queue | Job/task runners active; `jobs` and `failed_jobs` both 0 |
 | Backups | One-off full dump taken 2026-09-14; no routine and no restore test yet |
@@ -135,12 +135,13 @@ type `NMI_TYPE_CUSTOM`, created through the Static Pages plugin. In OJS 3.5 the
 | Acronym / abbreviation | MDAJ / Multidiscip. Aviat. J. |
 | Public path | `mdaj` |
 | Online ISSN | 3152-8961 (shown in the theme header bar) |
-| Print ISSN | 3122-3206 (configured, displayed nowhere) |
+| Print ISSN | 3122-3206 (shown in the theme header topbar beside the online ISSN) |
 | Publisher institution | Hasan Ahmed Omar Bjaili Est. |
-| Publisher address / country | not configured |
+| Publisher URL | https://mdajournal.com |
+| Publisher address / country | 4232 King Abdulaziz Rd, Albasatin District, Jeddah 23719, Saudi Arabia; country `SA` |
 | Contact name / email | Editorial Manager / em@mdajournal.com |
 | Support name / email | MDAJ Support / support@mdajournal.com |
-| Site-level contact | "Open Journal Systems" / admin@mdajournal.com (installation default name) |
+| Site-level contact | MDA Journal / admin@mdajournal.com |
 | Journal logo | restored 2026-09-14 (`mdaj.svg`, rendered in the header) |
 | Journal thumbnail | added 2026-09-14 (the red SVG mark, `journalThumbnail_en`) |
 | Favicon | restored 2026-09-14 (`favicon_en.png`, the red firebrick mark) |
@@ -154,8 +155,8 @@ type `NMI_TYPE_CUSTOM`, created through the Static Pages plugin. In OJS 3.5 the
 | Self-registration | disabled (`disableUserReg = 1`); contact-first author intake is the agreed model |
 | Review model | double-blind (`defaultReviewMode = 2`), 4 weeks to review, 4 weeks to respond |
 | Author guidelines, submission checklist, privacy statement, open access policy | configured |
-| LOCKSS statement | configured in settings but not rendered on any public page |
-| CLOCKSS | not configured |
+| LOCKSS statement | removed 2026-09-15; no LOCKSS membership was confirmed |
+| CLOCKSS | removed 2026-09-15; no CLOCKSS membership was confirmed |
 | OAI-PMH | enabled; repository identifier `ojs.mdajournal.com` |
 | DOIs | enabled for publications, suffix type `default`, created at copyedit; no prefix and no registration agency |
 | Fees | no OJS fee or payment configuration; the Charges page states an APC of USD 100 with a waiver policy |
@@ -195,11 +196,13 @@ Service and integration state, verified 2026-09-14: the online ISSN is issued
 prefix; the Google Scholar plugin is enabled; ORCID is enabled at the journal
 level with Public API Production credentials (site-level settings remain
 empty); the DOAJ export plugin is registered in
-`versions` with no configuration; no preservation plugin (PKP Preservation
-Network, LOCKSS or CLOCKSS) is installed; and this distribution ships no
-similarity-check/iThenticate plugin. Costs, sequencing and the remaining setup
-work for these services are tracked in `actions.md` (actions 4, 6, 7, 16, 35
-and 36).
+`versions` with no configuration; no preservation plugin is installed, and the
+stored LOCKSS/CLOCKSS license texts were removed on 2026-09-15 because no
+membership was confirmed — PKP Preservation Network (PLN) is the chosen route
+and is deferred until after the first issue is published; and this distribution
+ships no similarity-check/iThenticate plugin. Costs, sequencing and the remaining
+setup work for these services are tracked in `actions.md` (actions 4, 6, 7, 16,
+35 and 36).
 
 Search-engine state, verified 2026-09-14: the homepage meta description comes
 from the journal's `searchDescription` field alone — `customHeaders` was emptied

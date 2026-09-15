@@ -1,6 +1,6 @@
 # MDA Journal — Action List
 
-**Last updated:** 2026-09-14
+**Last updated:** 2026-09-15
 
 This is the working task list for the MDA Journal site. Verified state,
 settings, site map and theme documentation live in `project.md`; this file holds
@@ -17,7 +17,8 @@ Conventions:
 - Never put passwords, API keys, salts, or SMTP credentials in this file.
 
 If you want the shortlist that decides whether the journal can launch: **1, 3, 4,
-18, 19** (action 2 is closed). Public-facing defects and decisions are **5–17**.
+17** (actions 2, 18 and 19 are closed). Public-facing defects and decisions are
+**5–17**.
 
 ---
 
@@ -56,12 +57,12 @@ If you want the shortlist that decides whether the journal can launch: **1, 3, 4
   Location: Settings → Distribution → DOIs, plus the Crossref plugin settings.
   Verify: a deposit from OJS registers a DOI and the `dois` table records it.
 
-- [ ] **5. Decide on the print ISSN.**
-  `journal_settings.printIssn` is `3122-3206`, but there is no print edition and
-  the number is displayed nowhere. Show it beside the online ISSN in the theme
-  header bar (or About page), or remove it.
-  Location: Settings → Journal → Masthead; theme
-  `templates/frontend/components/header.tpl`.
+- [x] **5. Decide on the print ISSN. — CLOSED 2026-09-15**
+  `journal_settings.printIssn` is `3122-3206`, and the theme header topbar now
+  shows it beside the online ISSN (`3152-8961`). Verified on the live homepage;
+  the topbar renders both labels and values when either ISSN is present.
+  Location: `mdaDetox` theme
+  `templates/frontend/components/header.tpl`, `styles/components/header.less`.
 
 - [ ] **6. Submit the sitemap and prove Google Scholar readiness.**
   Done 2026-09-14: `sitemap.xml` is live (18 URLs) and is now regenerated daily
@@ -150,14 +151,15 @@ If you want the shortlist that decides whether the journal can launch: **1, 3, 4
   "mdajj" typo is gone. Verified by reading
   `navigation_menu_item_settings` for item 27, `remoteUrl`.
 
-- [ ] **16. Adopt a preservation route and fix the LOCKSS wording.**
-  Serious indexes expect a preservation policy, and
-  `journal_settings.lockssLicense` currently claims LOCKSS participation with no
-  membership confirmed. Prefer the free PKP Preservation Network (PLN) plugin —
-  it is not installed in this OJS yet — and treat LOCKSS/CLOCKSS (paid) as
-  alternatives. Then publish the statement that matches the chosen service, or
-  remove it, and document what happens to the archive if mdajournal.com
-  disappears.
+- [ ] **16. Install PLN and publish the preservation statement after issue 1.**
+  Decision 2026-09-15: use the free PKP Preservation Network (PLN), deferred
+  until after the first issue is published. The misleading LOCKSS and CLOCKSS
+  license texts were removed from `journal_settings` today; backup:
+  `/home/mdaj/backups/preservation-settings-20260915.sql`.
+  Remaining: install and configure the PLN plugin, accept its agreement, publish
+  the statement matching PLN, and document what happens to the archive if
+  mdajournal.com disappears.
+  Location: Settings → Distribution → Archiving / PLN plugin settings.
 
 - [ ] **17. Decide the fee position.**
   The Charges page states an Article Processing Charge of USD 100 with a waiver
@@ -168,17 +170,18 @@ If you want the shortlist that decides whether the journal can launch: **1, 3, 4
 
 ## D. Journal identity and accounts (18–22)
 
-- [ ] **18. Complete publisher and contact identity.**
-  `publisherInstitution` is set to "Hasan Ahmed Omar Bjaili Est.", but no
-  publisher address or country exists, and `journal_settings` has no
-  `mailingAddress`, `location`, `contactTitle`, `contactAffiliation`,
-  `contactPhone` or `supportPhone`.
-  Location: Settings → Journal → Masthead and Contact.
+- [x] **18. Complete publisher and contact identity. — CLOSED 2026-09-15**
+  Current OJS 3.5 contact fields are populated: publisher institution, publisher
+  URL (`https://mdajournal.com`), mailing address, country (`SA`), principal
+  contact name/email/phone/affiliation, and support name/email/phone. The old
+  audit fields `contactTitle` and `location` are not fields in the current
+  context schema or contact form. Backup:
+  `/home/mdaj/backups/identity-settings-20260915.sql`.
 
-- [ ] **19. Replace the site-level contact name.**
-  `site_settings.contactName` is still the installation default
-  "Open Journal Systems".
-  Location: Site Settings → Contact (administrator account).
+- [x] **19. Replace the site-level contact name. — CLOSED 2026-09-15**
+  `site_settings.contactName` is now `MDA Journal`; the email remains
+  `admin@mdajournal.com`. Backup:
+  `/home/mdaj/backups/identity-settings-20260915.sql`.
 
 - [ ] **20. Resolve the editorial board.**
   `mastheadUserGroupIds` is `[3, 5, 19]`, but group 19 (Editorial Board Member)
