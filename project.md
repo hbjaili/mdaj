@@ -201,8 +201,8 @@ stored LOCKSS/CLOCKSS license texts were removed on 2026-09-15 because no
 membership was confirmed — PKP Preservation Network (PLN) is the chosen route
 and is deferred until after the first issue is published; and this distribution
 ships no similarity-check/iThenticate plugin. Costs, sequencing and the remaining
-setup work for these services are tracked in `actions.md` (actions 4, 6, 7, 16,
-35 and 36).
+setup work for these services are tracked in `actions.md` (actions 3, 5, 6, 9,
+10, 14, 23 and 24).
 
 Search-engine state, verified 2026-09-14: the homepage meta description comes
 from the journal's `searchDescription` field alone — `customHeaders` was emptied
@@ -216,7 +216,8 @@ The bare domain root 301-redirects to `/mdaj/`, and `sitemap.xml` (18 URLs today
 extended automatically with published issues and articles) is regenerated daily
 at 03:15 by `scripts/generate-sitemap.php`, scheduled in the site owner's
 crontab. Registering with Google Search Console and Bing, and confirming Google
-Scholar reads a published article, remain open in action 6 in `actions.md`.
+Scholar reads a published article, remain open in actions 4 and 5 in
+`actions.md`.
 
 ## 6. Content, users and editorial state
 
@@ -271,8 +272,8 @@ That gap was closed on 2026-09-14: a notice was sent from
 was not reviewed, that the submission had been withdrawn from the editorial
 system, and apologising for the delay. The sent copy is kept at
 `/home/mdaj/backups/author-notice-20260914/author-notice-krishna-lok-singh.eml`
-(OJS cannot log it because the submission no longer exists). Action 33 in
-`actions.md` is closed.
+(OJS cannot log it because the submission no longer exists). This completed
+follow-up is no longer listed in `actions.md`.
 
 A full database dump taken before the rows were removed is kept at
 `/home/mdaj/backups/mdaj_ojsdb-20260914-pre-workflow.sql` (28 MB, mode 600,
@@ -487,15 +488,16 @@ no access to this installation.
 Open work is tracked in `/home/mdaj/actions.md`. That file lists every
 outstanding item with its location and verification step; this document only
 changes when an item is completed and the verified state here needs updating.
-Actions there are numbered 1–37 in order, and the numbers are permanent
-identifiers — closed actions leave a gap rather than being renumbered.
+Actions there are numbered 1–24 in order, and closed actions are removed after
+the work has been committed.
 
-As of 2026-09-14 the open work covers: rebuilding the submission pipeline and
-publishing a first issue, Crossref/DOI configuration and the paid service
-set-up (similarity checking, service budget), publisher and contact identity,
-theme and content defects (LOCKSS, fees, print ISSN), editorial board and
-reviewer capacity, sitemap and indexing, plugin clean-up (`soap`), and server
-operations (HSTS, Cloudflare, backups, cleanup, patching).
+As of 2026-09-15 the open work covers: rebuilding the submission pipeline and
+publishing a first issue, Crossref/DOI configuration, search-engine and
+indexing registration (Search Console, Bing, Google Scholar, DOAJ,
+Scopus/Web of Science, MEDLINE), PLN setup and preservation statement, fees,
+editorial board and reviewer capacity, ORCID redirect verification, and server
+operations (HSTS, Cloudflare, backups, cleanup, patching, similarity screening,
+service budget and renewals).
 
 ## 10. Documentation policy
 
