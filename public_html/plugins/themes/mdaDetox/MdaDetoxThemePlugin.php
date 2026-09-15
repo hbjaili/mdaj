@@ -8,6 +8,9 @@
 
 namespace APP\plugins\themes\mdaDetox;
 
+use APP\core\Application;
+use PKP\core\PKPPageRouter;
+use PKP\plugins\Hook;
 use PKP\plugins\ThemePlugin;
 
 class MdaDetoxThemePlugin extends ThemePlugin
@@ -51,6 +54,66 @@ class MdaDetoxThemePlugin extends ThemePlugin
         ]);
 
         $this->addScript('mda-detox-theme', 'js/main.js');
+
+        Hook::add('TemplateManager::display', $this->addSeoHeaders(...));
+    }
+
+    /**
+     * Register search-engine head tags that OJS 3.5 does not emit itself.
+     *
+     * - A self-referencing canonical link on journal pages, built through the
+     *   router so it always resolves to the clean RESTful URL even when the page
+     *   was requested as /index.php/....
+     * - noindex on utility pages (login, registration, password reset, search),
+     *   which should never compete with the journal's content in search results.
+     */
+    public function addSeoHeaders(string $hookName, array $args): bool
+    {
+        $templateMgr = $args[0] ?? null;
+        $request = Application::get()->getRequest();
+
+        if (!$templateMgr || !$request || !$request->getContext()) {
+            return false;
+        }
+
+        $router = $request->getRouter();
+        if (!$router instanceof PKPPageRouter) {
+            return false;
+        }
+
+        $page = $router->getRequestedPage($request);
+
+        if (in_array($page, ['login', 'user', 'search'], true)) {
+            $templateMgr->addHeader(
+                'mdaDetoxRobots',
+                '<meta name="robots" content="noindex, follow" />'
+            );
+
+            return false;
+        }
+
+        $op = $router->getRequestedOp($request);
+        $path = $router->getRequestedArgs($request);
+
+        // The index operation is implicit: dropping it keeps the canonical on the
+        // short form (/mdaj/about) instead of /mdaj/about/index.
+        if ($op === 'index') {
+            $op = null;
+        }
+
+        // The journal home page is the context root, not /mdaj/index.
+        $url = ($page === '' || $page === null) && empty($path)
+            ? $router->url($request, null, null, null)
+            : $router->url($request, null, $page, $op, $path);
+
+        if ($url) {
+            $templateMgr->addHeader(
+                'mdaDetoxCanonical',
+                '<link rel="canonical" href="' . htmlspecialchars($url, ENT_QUOTES) . '" />'
+            );
+        }
+
+        return false;
     }
 
     public function getDisplayName(): string

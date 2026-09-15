@@ -78,6 +78,7 @@
 								<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="charges"}">Article Processing Charges</a></li>
 								<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="plagiarism-policy"}">Plagiarism Policy</a></li>
 								<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="open-access"}">Open Access Policy</a></li>
+								<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="about" op="privacy"}">{translate key="about.privacyStatement"}</a></li>
 								<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="editorial-team"}">Editorial Team</a></li>
 							</ul>
 						</div>
@@ -105,7 +106,9 @@
 					{if $pageFooter}
 						{capture assign="footerYear"}{$smarty.now|date_format:"Y"}{/capture}
 						<div class="mda_detox_footer_copyright">
-							{$pageFooter|regex_replace:"/20[0-9][0-9]/":$footerYear}
+							{* Always print the current year. A stored range such as "2026-2027"
+							   collapses to that single year, so the footer never goes stale. *}
+							{$pageFooter|regex_replace:"/20[0-9][0-9][ \t]*-[ \t]*20[0-9][0-9]|20[0-9][0-9]/":$footerYear}
 						</div>
 					{/if}
 					{if $currentContext}
@@ -119,13 +122,6 @@
 						</div>
 					{/if}
 				</div>
-				{if $currentContext}
-					<ul class="mda_detox_footer_nav">
-						<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="about"}">{translate key="navigation.about"}</a></li>
-						<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="about" op="contact"}">{translate key="about.contact"}</a></li>
-						<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="about" op="privacy"}">{translate key="about.privacyStatement"}</a></li>
-					</ul>
-				{/if}
 			</div>
 		</div>
 	</footer>

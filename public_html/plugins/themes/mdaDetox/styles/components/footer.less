@@ -135,7 +135,7 @@
 
 .mda_detox_footer_bottom_start {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	align-items: center;
 	gap: 16px;
 }
@@ -154,9 +154,18 @@
 	line-height: 1.6;
 }
 
+.mda_detox_footer_copyright {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.mda_detox_footer_badges {
+	flex: 0 0 auto;
+}
+
 .mda_detox_footer_nav {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	align-items: center;
 	gap: 24px;
 	margin: 0;

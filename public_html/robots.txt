@@ -1,2 +1,23 @@
+# Multi-Disciplinary Aviation Journal — https://mdajournal.com
+# Crawling is welcome; only OJS system paths and the management backend are
+# excluded. Utility pages that must not appear in search results (login,
+# registration, password reset, search results) are not blocked here — they
+# carry a noindex meta tag instead, which crawlers can only see if they are
+# allowed to fetch the page.
+
 User-agent: *
+Allow: /
+
+# OJS runtime and system directories
 Disallow: /cache/
+Disallow: /dbscripts/
+Disallow: /tools/
+Disallow: /registry/
+Disallow: /schemas/
+Disallow: /docs/
+Disallow: /cypress/
+
+# Journal management backend
+Disallow: /mdaj/management/
+
+Sitemap: https://mdajournal.com/sitemap.xml

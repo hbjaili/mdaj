@@ -12,6 +12,9 @@ HTTP responses, `config.inc.php`, the OJS database (`mdaj_ojsdb`), and the
 filesystem. Items that could not be verified are listed as open work rather than
 stated as fact.
 
+> **Open work is tracked in `actions.md`.** This document records verified state
+> and configuration only; keep the two files in step when something changes.
+
 ## 1. How this document is maintained
 
 This file replaces the earlier set of overlapping, partly obsolete documents:
@@ -24,17 +27,19 @@ folded in here, and completed actions are not reproduced.
 Rules for this file:
 
 - Record verified state, not intentions. Date every state snapshot.
-- Keep open work in one place (section 9) and delete items as they close.
+- Keep open work in `actions.md`, not here.
 - Never record passwords, API keys, salts, or SMTP credentials here.
 - Update this file whenever journal settings, policies, theme files, or server
   configuration change.
 
-`project.md` itself is untracked (the repository `.gitignore` ignores everything
-outside `public_html/`, `www`, and `.github/`), so it does not appear in
-`git status`. Track it or copy it elsewhere deliberately if that matters.
+`project.md` is tracked in the repository. The root `.gitignore` excludes local
+tooling and private data (`bin/`, `resources/`, `files/`, shell and tool
+dotfiles, OJS secrets, runtime caches and generated output) while leaving
+`project.md`, `public_html/`, `www`, `.github/` and `.gitignore` committable.
 
 Small related files point here:
 
+- `/home/mdaj/actions.md` (working task list; not part of the state record)
 - `/home/mdaj/resources/theme_info.md`
 - `/home/mdaj/public_html/plugins/themes/mdaDetox/README.md`
 - `/home/mdaj/public_html/plugins/themes/mdaDetox/templates/README.md`
@@ -56,12 +61,12 @@ OJS's own `README.md` and other upstream files are not project documentation.
 | Security config | `force_ssl`, `force_login_ssl`, `encryption = bcrypt`, rotated `salt`/`api_key_secret`, ALTCHA all set |
 | Email | SMTP via PurelyMail; SPF, DKIM and DMARC verified in DNS |
 | Users | 8 accounts, none disabled |
-| Submissions | 2, both still in the Submission stage; 0 review rounds, 0 decisions |
+| Submissions | 0 — both manuscripts were deleted on 2026-09-14 (see §6) |
 | Published content | 0 issues, 0 published articles, 0 DOI records |
 | ISSN | Online 3152-8961 (displayed), print 3122-3206 (configured, not displayed) |
 | Licence | CC BY 4.0 (`licenseUrl`), copyright holder type `author` |
 | Queue | Job/task runners active; `jobs` and `failed_jobs` both 0 |
-| Backups | No on-server backup directory found; off-server backup status unverified |
+| Backups | One-off full dump taken 2026-09-14; no routine and no restore test yet |
 
 ## 3. Locations and access
 
@@ -136,10 +141,13 @@ type `NMI_TYPE_CUSTOM`, created through the Static Pages plugin. In OJS 3.5 the
 | Contact name / email | Editorial Manager / em@mdajournal.com |
 | Support name / email | MDAJ Support / support@mdajournal.com |
 | Site-level contact | "Open Journal Systems" / admin@mdajournal.com (installation default name) |
+| Journal logo | restored 2026-09-14 (`mdaj.svg`, rendered in the header) |
+| Journal thumbnail | added 2026-09-14 (the red SVG mark, `journalThumbnail_en`) |
+| Favicon | restored 2026-09-14 (`favicon_en.png`, the red firebrick mark) |
 | Licence | CC BY 4.0 (`https://creativecommons.org/licenses/by/4.0`) |
 | Copyright holder type | author |
 | Copyright notice | Authors retain copyright; articles published under CC BY 4.0 |
-| Page footer text | "Copyright © MDA Journal 2026-2027. All rights reserved." |
+| Page footer text | stored as "Copyright © MDA Journal 2026-2027. All rights reserved."; the theme replaces any year or year range with the current year, so it renders "Copyright © MDA Journal 2026. All rights reserved." |
 | Sections | 1 Research Articles (ART), 2 Review Articles (REV), 3 Short Communication (COM), 4 Case Report (CSR), all with written section policies |
 | Masthead user groups | `[3, 5, 19]` (journal editor, section editor, editorial board member) |
 | Submissions | open |
@@ -155,6 +163,58 @@ type `NMI_TYPE_CUSTOM`, created through the Static Pages plugin. In OJS 3.5 the
 The About page renders only the journal's `about` text, which matches OJS 3.5
 core behaviour; publisher, ISSN and archiving details are not surfaced there.
 
+Three journal image settings were cleared on 2026-09-14 at the journal manager's
+request: `pageHeaderLogoImage`, `journalThumbnail` and `favicon`. The uploaded
+files were moved out of the web root to
+`/home/mdaj/backups/branding-20260914/` (a folder name, not a classification),
+with the removed settings rows in `journal_settings-branding.sql`, and a stale
+`styleSheet.css` — a leftover from the retired healthSciences theme that was no
+longer served — went with them. Theme artwork (homepage hero, patterns, About
+image, licence badges) and the design sources under
+`/home/mdaj/resources/assets` were left untouched. No journal identity was
+affected: the name, ISSN, policies, theme colour (`#6377EE`) and layout are
+unchanged.
+
+Removing the journal logo also removed the header's brand mark, leaving the
+theme's text fallback ("Multi-Disciplinary Aviation Journal") in the top bar, so
+the logo was restored the same day: `pageHeaderLogoImage` points at the
+journal's `mdaj.svg`, the file is back in
+`public/journals/1/pageHeaderLogoImage_en`, and the header renders
+`has_site_logo` with the logo image. The stored filename metadata was corrected
+on 2026-09-14 — it had recorded `mda.svg`, which is an older, different file
+that is not the journal logo (the served image is byte-identical to
+`resources/assets/mdaj.svg`) — and its alt text now reads
+"Multi-Disciplinary Aviation Journal (MDAJ) logo". The favicon
+(`favicon_en.png` and `favicon_en.svg`) was restored the same day, and the
+thumbnail was added on 2026-09-14 from the same red SVG mark. The older
+unreferenced `pageHeaderLogoImage_en.png` stays in the backup folder. All three
+images are now in place.
+
+Service and integration state, verified 2026-09-14: the online ISSN is issued
+(3152-8961); the Crossref plugin is enabled but has no credentials and no DOI
+prefix; the Google Scholar plugin is enabled; ORCID is enabled at the journal
+level with Public API Production credentials (site-level settings remain
+empty); the DOAJ export plugin is registered in
+`versions` with no configuration; no preservation plugin (PKP Preservation
+Network, LOCKSS or CLOCKSS) is installed; and this distribution ships no
+similarity-check/iThenticate plugin. Costs, sequencing and the remaining setup
+work for these services are tracked in `actions.md` (actions 4, 6, 7, 16, 35
+and 36).
+
+Search-engine state, verified 2026-09-14: the homepage meta description comes
+from the journal's `searchDescription` field alone — `customHeaders` was emptied
+to remove a duplicate — while keywords/author/robots tags were dropped with it
+(robots defaults to index, follow). The theme plugin registers a
+self-referencing `<link rel="canonical">` built through the OJS router, so
+`/index.php/mdaj/...` requests canonicalise to the clean URLs, and login,
+registration and search pages carry `noindex, follow` instead. `robots.txt`
+allows crawling and blocks only OJS system paths and the management backend.
+The bare domain root 301-redirects to `/mdaj/`, and `sitemap.xml` (18 URLs today,
+extended automatically with published issues and articles) is regenerated daily
+at 03:15 by `scripts/generate-sitemap.php`, scheduled in the site owner's
+crontab. Registering with Google Search Console and Bing, and confirming Google
+Scholar reads a published article, remain open in action 6 in `actions.md`.
+
 ## 6. Content, users and editorial state
 
 Users (8, none disabled):
@@ -168,21 +228,53 @@ Users (8, none disabled):
 | Hasan (hbjaili@gmail.com) | Author | 2026-09-06 |
 | ATTAR | Reviewer | 2025-12-19 |
 | batikh | Reviewer | 2025-12-18 |
-| Oozypal@gmail.com | Reader (author and reviewer role windows ended) | never logged in |
+| deleted@mdajournal.com ("Deleted User") | Reader; disabled spam-merge sink | never logged in |
 
 No user belongs to the Editorial Board Member group (19), no reviewer interests
-are recorded, and only two reviewers have ever logged in.
+are recorded, and only two reviewers have ever logged in. The
+`deleted@mdajournal.com` account is retained deliberately as the merge target
+when clearing spam users, because OJS has no user-deletion feature; it was
+renamed from `Oozypal@gmail.com` and disabled on 2026-09-14. Note: OJS cannot
+open a disabled account in the admin user editor — `Repo::user()->get()`
+excludes disabled users, so the edit screen returns "The requested resource was
+not found". To edit this account through the UI later, temporarily re-enable it,
+make the change, then disable it again.
 
-Submissions:
+Submissions: none. The journal currently holds no manuscripts. On 2026-09-14 the
+journal manager (`ojsadmin`) deleted both submissions that were in the system:
 
-| ID | Title | Author | Submitted | Stage |
+| ID | Title | Author | Submitted | Deleted |
 | --- | --- | --- | --- | --- |
-| 2 | The Low-Cost Carrier Ascendancy in India: An Empirical Evaluation | Krishna Lok Singh | 2026-06-12 | Submission (stage 1) |
-| 3 | Boolean Reliability Models for Representative Aircraft Autoland Architectures | Hasan Ahmed | 2026-09-06 | Submission (stage 1) |
+| 2 | The Low-Cost Carrier Ascendancy in India: An Empirical Evaluation | Krishna Lok Singh | 2026-06-12 | 2026-09-14 |
+| 3 | Boolean Reliability Models for Representative Aircraft Autoland Architectures | Hasan Ahmed | 2026-09-06 | 2026-09-14 |
 
-Both are unpublished, each has a submission file but no galley, no review round,
-no review assignment and no editorial decision. Submission 2 has been idle since
-June 2026.
+The deletion is complete and clean: `submissions`, `publications`, `authors`,
+`files`, `submission_files`, `review_rounds`, `edit_decisions` and the search
+tables hold no leftover rows, the manuscript files are gone from
+`/home/mdaj/files/journals`, and the public site is unaffected (home, current
+issue and issue archive still return HTTP 200; OAI-PMH reports no records).
+Neither submission had reached review, so no review or decision history was
+lost.
+
+The deleted submissions had produced four logged emails (log rows 9–12): the
+editor-assignment notice and the submission acknowledgement for each one, sent
+2026-06-12 and 2026-09-06. Those rows were removed with the submissions, which is
+why `email_log` is now empty. The corresponding author of submission 2 therefore
+did receive the automatic acknowledgement on 2026-06-12 but no outcome
+afterwards.
+
+That gap was closed on 2026-09-14: a notice was sent from
+`MDA Journal Editorial Office <em@mdajournal.com>` explaining that the manuscript
+was not reviewed, that the submission had been withdrawn from the editorial
+system, and apologising for the delay. The sent copy is kept at
+`/home/mdaj/backups/author-notice-20260914/author-notice-krishna-lok-singh.eml`
+(OJS cannot log it because the submission no longer exists). Action 33 in
+`actions.md` is closed.
+
+A full database dump taken before the rows were removed is kept at
+`/home/mdaj/backups/mdaj_ojsdb-20260914-pre-workflow.sql` (28 MB, mode 600,
+outside the web root). It preserves the deleted submissions' metadata; the
+manuscript files themselves are not recoverable.
 
 Announcements — 5 active, none with an expiry date, all posted 2026-09-10/11:
 
@@ -192,7 +284,7 @@ Announcements — 5 active, none with an expiry date, all posted 2026-09-10/11:
 - Exploring the Future of Aviation: Our Multi-Disciplinary Focus
 - Commitment to Rapid and Rigorous Peer Review
 
-Email: 4 entries in `email_log` and 6 journal-specific email template overrides.
+Email: `email_log` is empty; 6 journal-specific email template overrides exist.
 
 ## 7. Theme: mdaDetox
 
@@ -229,14 +321,19 @@ search results still use core markup inside the themed header and footer.
 ### Implemented features
 
 - Native OJS 3.5 theme plugin with Default Theme inheritance and a colour option
+- SEO head tags registered from the plugin's `TemplateManager::display` hook: a
+  router-built canonical link, plus `noindex` on login, registration and search
 - Detox-style white responsive header with OJS menus, search, user actions and a
   compact sticky state that matches the Detox reference behaviour
 - Full-width illustrated homepage: animated heading, CMS-managed hero text from
   Additional Content, feature cards, announcements and current-issue output
 - Themed About, Contact, Editorial Team, Privacy, Announcements (list and
   detail), Current Issue, Issue Archive, Information and custom policy pages
-- Footer with brand, quick links, policy links, contact block, open-access and
-  CC BY badges, and a dynamically resolved copyright year
+- Footer with brand, quick links, policy/team links including Privacy Statement,
+  contact block, open-access and CC BY badges, and a copyright year that always
+  shows the current year (any stored year or year range is collapsed to it).
+  The duplicate bottom About/Contact links were removed; Privacy Statement now
+  lives only in the Policies &amp; Team column.
 - Contact-first copy on the logged-out submissions page
 - Keyboard focus, skip links and reduced-motion support
 
@@ -288,10 +385,11 @@ node --check plugins/themes/mdaDetox/js/main.js
 php -r 'require "lib/pkp/lib/vendor/autoload.php"; $less = new Less_Parser(["compress" => true]); $less->parse("@mda-detox-primary:#6377EE;"); $less->parseFile("plugins/themes/mdaDetox/styles/index.less"); $less->parse("@baseUrl:\"https://example.test\";"); echo strlen($less->getCSS()), PHP_EOL;'
 ```
 
-After a meaningful change, walk the public pages (home, About, Editorial Team,
-Announcements list and detail, policy pages, Issue Archive, Search, Login,
-Submissions), then the authenticated flows (submission, review, decision) with a
-test account, at mobile, tablet and desktop widths.
+After a deployed change: clear the OJS template and data caches, re-check the
+affected public URL over HTTPS, walk the public pages (home, About, Editorial
+Team, Announcements list and detail, policy pages, Issue Archive, Search, Login,
+Submissions), then re-test the authenticated flows (submission, review,
+decision) with a test account at mobile, tablet and desktop widths.
 
 ### Activation, disabling and removal
 
@@ -373,117 +471,37 @@ no access to this installation.
 
 - Queue processing runs on schedule (many `ProcessQueueJobs` logs dated
   2026-09-14); no queued or failed jobs.
+- The site owner's crontab runs the sitemap generator daily at 03:15. A separate
+  system job, `/etc/cron.d/idrive-mysql-dump` (22:45 daily), dumps local MySQL
+  databases before the IDrive file backup; its output location is not readable
+  from the site account, so its coverage of `mdaj_ojsdb` is unverified.
 - `cache/` is about 16 MB, `files/` about 1.1 MB, `public/` about 176 KB.
 - `sessions` holds roughly 10 900 rows and `scheduledTaskLogs` holds 189 files;
   both are normal but worth pruning periodically.
 
 ## 9. Open work
 
-### 9.1 Publishing content
+Open work is tracked in `/home/mdaj/actions.md`. That file lists every
+outstanding item with its location and verification step; this document only
+changes when an item is completed and the verified state here needs updating.
+Actions there are numbered 1–37 in order, and the numbers are permanent
+identifiers — closed actions leave a gap rather than being renumbered.
 
-1. Take both submissions through review and publish the first issue, or decide
-   to launch with a clearly labelled forthcoming issue.
-2. Disposition submission 2 (idle since June 2026) — assign a section editor or
-   decline it.
-3. Before publishing, verify article metadata, final PDFs, references, ORCIDs,
-   funding and conflict statements, and licensing. Every article needs its own
-   stable public landing page.
-
-### 9.2 Identifiers and indexing
-
-4. Configure a Crossref DOI prefix and credentials, or disable the Crossref
-   plugin until they exist; no DOI records exist yet.
-5. Decide whether a print ISSN is appropriate — 3122-3206 is configured but no
-   print edition exists and the number is not displayed.
-6. Create a sitemap, submit it to Google Search Console and Bing, and confirm
-   Google Scholar can read article landing pages and PDFs once articles exist.
-7. Consider DOAJ and MEDLINE/PubMed only after a publication record exists
-   (DOAJ expects around five research articles per year; MEDLINE needs at least
-   12 months and around 40 articles).
-
-### 9.3 Site content and consistency
-
-8. Fix the footer copyright rendering: the template rewrites every four-digit
-   year, so "2026-2027" renders as "2026-2026".
-9. Reconcile the footer wording ("All rights reserved") with the CC BY 4.0
-   licence, and decide whether the footer should carry a year range at all.
-10. Remove the duplicated `<meta name="description">` (core plus
-    `customHeaders`) and add a canonical link.
-11. Harden `robots.txt` (currently only `Disallow: /cache/`) with the system
-    paths it should exclude.
-12. Update `readerInformation`: it still tells readers to use a "Register" link
-    in the home-page header and sends them to `/mdaj/user/register`, which now
-    only says registrations are closed.
-13. Update `authorInformation`: it uses an `http://` link and points to
-    `/mdaj/author-guidelines`, which returns 404; point it at
-    `/mdaj/about/submissions#authorGuidelines`.
-14. Fix the two remaining non-canonical `/index.php/mdaj/...` links inside the
-    Call for Papers and Open Access custom pages.
-15. Correct the stored remote URL for the Author Guidelines menu item, which
-    contains a typo (`/mdajj/...`) even though the live menu renders the correct
-    URL.
-16. Surface or remove the configured LOCKSS statement; nothing on the public
-    site displays it and there is no confirmed LOCKSS participation.
-17. Decide the fee position: the Charges page states an APC of USD 100 with
-    waivers while OJS has no fee or payment configuration.
-
-### 9.4 Journal identity and accounts
-
-18. Add the publisher's registered address and country, and complete contact
-    details (mailing address, contact title, affiliation, phone).
-19. Replace the site-level contact name "Open Journal Systems".
-20. Populate the Editorial Board Member group and masthead, or drop group 19
-    from `mastheadUserGroupIds` and rely on the custom Editorial Team page.
-21. Recruit reviewers (only two have ever logged in) and record reviewer
-    interests.
-22. Review the eight accounts: confirm `em@mdajournal.com` (idle since October
-    2025) and remove or document `Oozypal@gmail.com`, which never logged in.
-
-### 9.5 Integrations and plugins
-
-23. The Google Analytics plugin is enabled with no measurement ID — add a GA4
-    ID or disable the plugin.
-24. ORCID is disabled with empty credentials — enable and configure, or keep it
-    disabled deliberately.
-25. Decide whether the enabled `subscriptionBlock` is appropriate for a fully
-    open access journal with no subscription types.
-26. Remove stale plugin records for themes whose directories no longer exist
-    (`katen`, `mdaScience`, `healthSciences`, `healthAtlas`, `ammoniteTheme`,
-    `bootstrap3`, `material`, `classic`, `erticazPress`) so the plugin list
-    matches disk.
-27. Confirm whether any enabled integration needs the missing PHP `soap`
-    extension; install it only if required.
-
-### 9.6 Server and operations
-
-28. Decide on HSTS (`Strict-Transport-Security`) once HTTPS is confirmed for
-    every required hostname; it is not currently sent.
-29. Decide whether to put the site behind Cloudflare. If so: Full (strict) SSL,
-    WAF and bot rules, conservative rate limiting, `mod_remoteip`, then
-    `trust_x_forwarded_for = On`, and finally restricted origin access. None of
-    this is in place today.
-30. Establish and test a documented backup routine (database, `public/`,
-    `files/`, configuration); no on-server backup directory or restore test was
-    found.
-31. Remove the placeholder reCAPTCHA keys from `config.inc.php` (ALTCHA is the
-    active protection) and remove upstream development files that are publicly
-    readable, such as `phpdoc.dist.xml`, `cypress.config.js`, `vite.config.js`,
-    `.eslintrc.cjs`, `jsconfig.json` and `schemaspy.properties`. Markdown files
-    under the web root (for example
-    `plugins/themes/mdaDetox/README.md`) are also served as plain text, so keep
-    them free of sensitive detail.
-32. Prune old session rows and `scheduledTaskLogs` files periodically, and keep
-    OJS, PHP, Apache, MariaDB and OS packages patched; confirm the current OJS
-    3.5.x patch release before each upgrade.
-33. Decide how this project guide is version-controlled, since it is currently
-    untracked.
+As of 2026-09-14 the open work covers: rebuilding the submission pipeline and
+publishing a first issue, Crossref/DOI configuration and the paid service
+set-up (similarity checking, service budget), publisher and contact identity,
+theme and content defects (LOCKSS, fees, print ISSN), editorial board and
+reviewer capacity, sitemap and indexing, plugin clean-up (`soap`), and server
+operations (HSTS, Cloudflare, backups, cleanup, patching).
 
 ## 10. Documentation policy
 
-This file is the single source of truth. Component README files under
-`plugins/themes/mdaDetox` and `resources/theme_info.md` must stay short and point
-here instead of duplicating project state. Historic design notes may stay under
-`/home/mdaj/resources` for reference only; they are not authoritative.
+This file is the single source of truth for verified state and configuration;
+`/home/mdaj/actions.md` is the working list of open actions. Component README
+files under `plugins/themes/mdaDetox` and `resources/theme_info.md` must stay
+short and point here instead of duplicating project state. Historic design notes
+may stay under `/home/mdaj/resources` for reference only; they are not
+authoritative.
 
 The authoritative Detox reference remains `/home/mdaj/resources/Detox`
 (`index.php`, `parts/header/main-header.php`, `assets/css/style.css`,

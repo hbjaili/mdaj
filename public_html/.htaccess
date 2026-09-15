@@ -5,6 +5,11 @@
   RewriteEngine On
   RewriteBase /
 
+  # Send the bare domain root to the journal with a permanent redirect.
+  # OJS answers / with a temporary redirect to /mdaj; 301 is the correct
+  # signal for search engines because the journal path is permanent.
+  RewriteRule ^$ /mdaj/ [R=301,L]
+
   # Redirect www to non-www (optional)
   # RewriteCond %{HTTP_HOST} ^www\.mdajournal\.com$ [NC]
   # RewriteRule ^(.*)$ https://mdajournal.com/$1 [L,R=301]
@@ -16,4 +21,3 @@
   # Main rule to remove index.php
   RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>
-
